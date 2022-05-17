@@ -1,0 +1,58 @@
+import time
+
+produtos_cadastrados = ["Pão", "Refrigerante", "Tomate"]
+precos = [5.22, 7.00, 7.00]
+carrinho = []
+
+
+def mercado():
+
+    opcao = int(input(
+        "1 - Cadastrar produto \n"
+        "2 - Comprar produto \n"
+        "3 - Ver lista de produtos \n"
+        "4 - Ver carrinho\n"
+        "5 - Encerrar compras\n"
+        "O que deseja fazer: \n"))
+
+    if opcao == 1:
+        produtos_cadastrados.append(input("Adicione um produto para o mercado: "))
+        precos.append(float(input("Adicione o preço do produto: ")))
+        print("Produto: ", produtos_cadastrados[-1], " com o preço ", precos[-1], "foi adicionado no mercado")
+        mercado()
+
+    elif opcao == 2:
+        busca = input("\nDigite o nome do produto que deseja comprar: ")
+        if busca in produtos_cadastrados:
+            print("Produto adicionado ao carrinho!")
+            carrinho.append(busca)
+        else:
+            print("Este produto não existe")
+
+        mercado()
+
+    elif opcao == 3:
+        print("Produtos cadastrados: \n")
+        for produto, preco in zip(produtos_cadastrados, precos):
+            print(produto, "R$" + str(preco))
+
+        print("\n")
+        mercado()
+
+    elif opcao == 4:
+        print("Produtos no carrinho: \n")
+        print(' | '.join(carrinho))
+        print("\n")
+        mercado()
+
+    elif opcao == 5:
+        print("Fechando sistema....")
+        time.sleep(2)
+        quit()
+    else:
+        print("Opção inválida")
+        time.sleep(2)
+        mercado()
+
+
+mercado()
